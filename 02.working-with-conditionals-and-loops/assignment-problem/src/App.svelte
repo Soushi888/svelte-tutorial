@@ -1,13 +1,42 @@
-<h1>Assignment</h1>
+<script>
+  let passwordInput = "";
+  let passwordError = "";
+  let passwordList = [];
 
-<p>Solve these tasks.</p>
+  function addPassword() {
+    if (passwordInput.length >= 5 && passwordInput.length <= 10) passwordList = [...passwordList, passwordInput];
+    console.log(passwordList);
+  }
 
-<ol>
-	<li>Add a password input field and save the user input in a variable.</li>
-	<li>Output "Too short" if the password is shorter than 5 characters and "Too long" if it's longer than 10.</li>
-	<li>Output the password in a paragraph tag if it's between these boundaries.</li>
-	<li>Add a button and let the user add the passwords to an array.</li>
-	<li>Output the array values (= passwords) in a unordered list (ul tag).</li>
-	<li>Bonus: If a password is clicked, remove it from the list.</li>
-</ol>
+  function deletePassword(evt) {
+    passwordList = passwordList.filter(e => e !== evt.target.innerHTML)
+  }
+</script>
 
+<label for="password">Password : <input type="password" id="password" bind:value={passwordInput}></label>
+
+{#if (passwordInput.length < 5 && passwordInput.length > 0)}
+    <p class="error">Too short.</p>
+{:else if (passwordInput.length > 10)}
+    <p class="error">Too long.</p>
+{:else }
+    <p>{passwordInput}</p>
+{/if}
+
+<button on:click={addPassword}>Add to the list</button>
+
+<ul>
+    {#each passwordList as password, i (i)}
+        <li id={i} on:click={deletePassword}>{i+1} - <span>{password}</span></li>
+    {/each}
+</ul>
+
+<style>
+    .error {
+        color: red;
+    }
+
+    span {
+        cursor: pointer;
+    }
+</style>
