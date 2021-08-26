@@ -8,8 +8,8 @@
     console.log(passwordList);
   }
 
-  function deletePassword(evt) {
-    passwordList = passwordList.filter(e => e !== evt.target.innerHTML)
+  function deletePassword(index) {
+    passwordList = passwordList.filter((pw, idx) => index !== idx)
   }
 </script>
 
@@ -27,7 +27,7 @@
 
 <ul>
     {#each passwordList as password, i (i)}
-        <li id={i} on:click={deletePassword}>{i+1} - <span>{password}</span></li>
+        <li id={i} on:click={deletePassword.bind(this, i)}>{i + 1} - <span>{password}</span></li>
     {/each}
 </ul>
 
