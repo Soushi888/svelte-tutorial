@@ -48,7 +48,7 @@
     }
 </style>
 
-<div id="form">
+<form id="form">
     <div class="form-control">
         <label for="userName">User Name</label>
         <input type="text" bind:value={name} id="userName"/>
@@ -65,11 +65,12 @@
         <label for="desc">Description</label>
         <textarea rows="3" bind:value={description} id="desc"/>
     </div>
-</div>
+</form>
 
-<button on:click={addContact}>Add Contact Card</button>
+<button on:click|preventDefault={addContact} type="submit" form="form">Add Contact Card</button>
 <button on:click={deleteFirst}>Delete first</button>
 <button on:click={deleteLast}>Delete last</button>
+<button on:click={() => console.log(`Name : ${name}`)}>Log</button> <!-- Inline function !-->
 
 {#if (formState === "done")}
     {#each createdContacts as contact, i (Math.random())}
