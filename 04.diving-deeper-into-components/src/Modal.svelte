@@ -1,7 +1,23 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+
+  function closeModal() {
+    dispatch("close-modal");
+  }
+
+  function closeWithKeyDown(evt) {
+    if (evt.key === "Escape") closeModal();
+  }
+
+  if (document.onkeydown) {
+    console.log();
+  }
 </script>
 
-<div class="backdrop" />
+<svelte:window on:keydown={closeWithKeyDown} />
+<div class="backdrop" on:click={closeModal} />
 <div class="modal">
   <header>
     <slot name="header" />
@@ -11,7 +27,7 @@
   </div>
   <footer>
     <slot name="footer">
-      <button>Close</button>
+      <button on:click={closeModal}>Close</button>
     </slot>
   </footer>
 </div>

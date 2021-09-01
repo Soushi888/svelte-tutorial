@@ -16,6 +16,8 @@
     },
   ];
 
+  let showModal = false;
+
   function addToCart(evt) {
     console.log(evt.type, evt.detail);
   }
@@ -33,8 +35,12 @@
   />
 {/each}
 
-<Modal>
-  <h1 slot="header">Hello World !</h1>
-  <p>Here I am !</p>
-  <button slot="footer">Confirm</button>
-</Modal>
+<button on:click={() => (showModal = true)}>Show Modal</button>
+
+{#if showModal}
+  <Modal on:close-modal={() => (showModal = false)}>
+    <h1 slot="header">Hello World !</h1>
+    <p>Here I am !</p>
+    <button slot="footer" on:click={() => (showModal = false)}>Confirm </button>
+  </Modal>
+{/if}
