@@ -1,0 +1,23 @@
+{
+  "name": "svelte-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soushi888/svelte-tutorial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soushi888/svelte-tutorial/issues"
+  },
+  "homepage": "https://github.com/Soushi888/svelte-tutorial#readme",
+  "devDependencies": {
+    "prettier": "^2.3.2",
+    "prettier-plugin-svelte": "^2.4.0"
+  }
+}
