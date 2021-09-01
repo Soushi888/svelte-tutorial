@@ -1,6 +1,7 @@
 <script>
   import Product from "./Product.svelte";
   import Modal from "./Modal.svelte";
+  import { tick } from "svelte";
 
   let products = [
     {
@@ -19,12 +20,34 @@
   let showModal = false;
   let closeable = false;
 
+  let text = "Lorem Ipsum...";
+
   function addToCart(evt) {
     console.log(evt.type, evt.detail);
   }
 
   function deleteProduct(evt) {
     console.log(evt.type, evt.detail);
+  }
+
+  async function transformText(evt) {
+    if (evt.keyCode !== 9) {
+      return;
+    }
+    evt.preventDefault();
+
+    const selectionStart = evt.target.selectionStart;
+    const selectionEnd = evt.target.selectionEnd;
+    const value = evt.target.value;
+
+    text =
+      value.slice(0, selectionStart) +
+      value.slice(selectionStart, selectionEnd).toUpperCase() +
+      value.slice(selectionEnd);
+
+    await tick();
+    evt.target.selectionStart = selectionStart;
+    evt.target.selectionEnd = selectionEnd;
   }
 </script>
 
@@ -50,3 +73,5 @@
     </button>
   </Modal>
 {/if}
+
+<textarea rows="5" on:keydown={transformText}>{text}</textarea>
