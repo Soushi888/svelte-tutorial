@@ -34,6 +34,7 @@
 {/each}
 
 <Modal>
-  <h1>Hello World !</h1>
+  <h1 slot="header">Hello World !</h1>
   <p>Here I am !</p>
+  <button slot="footer">Confirm</button>
 </Modal>
