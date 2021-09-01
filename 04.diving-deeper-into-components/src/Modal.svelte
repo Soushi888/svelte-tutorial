@@ -1,8 +1,15 @@
 <script>
-  import { createEventDispatcher } from "svelte";
+  import {
+    createEventDispatcher,
+    onMount,
+    onDestroy,
+    beforeUpdate,
+    afterUpdate,
+  } from "svelte";
 
   const dispatch = createEventDispatcher();
   let agreed = false;
+  let autoScroll = false;
 
   function closeModal() {
     dispatch("close-modal");
@@ -15,6 +22,30 @@
   if (document.onkeydown) {
     console.log();
   }
+
+  /* Component life cycle */
+  console.log("Script executed.");
+
+  onMount(() => {
+    console.log("On Mount.");
+  });
+
+  onDestroy(() => {
+    console.log("On destroy.");
+  });
+
+  beforeUpdate(() => {
+    console.log("Before update.");
+    autoScroll = agreed;
+  });
+
+  afterUpdate(() => {
+    console.log("After update.");
+    if (autoScroll) {
+      const modal = document.querySelector(".modal");
+      modal.scrollTo(0, modal.scrollHeight);
+    }
+  });
 </script>
 
 <svelte:window on:keydown={closeWithKeyDown} />
@@ -54,12 +85,12 @@
     top: 10vh;
     left: 10%;
     width: 80%;
-    max-height: 80vh;
+    max-height: 20vh;
     background: white;
     border-radius: 5px;
     z-index: 100;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-    /*overflow: scroll;*/
+    overflow-y: scroll;
   }
 
   header {
