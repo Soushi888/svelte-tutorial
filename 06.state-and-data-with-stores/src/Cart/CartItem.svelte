@@ -8,9 +8,14 @@
   export let id;
 
   let showDescription = false;
+  let description = "Not Available :(";
 
   function displayDescription() {
     showDescription = !showDescription;
+    const unsubscribe = products.subscribe((prods) => {
+      description = prods.find((p) => p.id === id).description;
+    });
+    unsubscribe();
   }
 
   function removeFromCart() {
@@ -28,7 +33,7 @@
   </Button>
   <Button on:click={removeFromCart}>Remove from Cart</Button>
   {#if showDescription}
-    <p>Not available :(</p>
+    <p>{description}</p>
   {/if}
 </li>
 

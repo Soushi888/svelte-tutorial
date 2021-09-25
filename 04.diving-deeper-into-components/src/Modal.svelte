@@ -43,7 +43,7 @@
     console.log("After update.");
     if (autoScroll) {
       const modal = document.querySelector(".modal");
-      modal.scrollTo(0, modal.scrollHeight);
+onDestroy(() => uns)      modal.scrollTo(0, modal.scrollHeight);
     }
   });
 </script>
