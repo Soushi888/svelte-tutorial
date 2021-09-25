@@ -2,18 +2,20 @@
   import CartItem from "./CartItem.svelte";
   import cart from "../stores/cart-store";
   import { onDestroy } from "svelte";
+  import { timer } from "../stores/timer-store";
 
-  // let items;
-  //
-  // const unsubscribe = cart.subscribe((i) => {
-  //   items = i;
-  // });
-  //
-  // onDestroy(() => unsubscribe());
+  const unsubscribe = timer.subscribe((count) => {
+    console.log(`Cart : ${count}`);
+  });
+
+  onDestroy(() => {
+    if (unsubscribe) unsubscribe();
+  });
 </script>
 
 <section>
   <h1>Cart</h1>
+  <h2>Count : {$timer}</h2>
   <ul>
     {#each $cart as item (item.id)}
       <CartItem id={item.id} title={item.title} price={item.price} />

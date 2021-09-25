@@ -19,9 +19,7 @@
   }
 
   function removeFromCart() {
-    cart.update((items) => {
-      return items.filter((i) => i.id !== id);
-    });
+    cart.removeItem(id);
   }
 </script>
 
