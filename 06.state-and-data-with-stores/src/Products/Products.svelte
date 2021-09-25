@@ -1,17 +1,17 @@
 <script>
-  import productsStore from "../stores/products-store";
+  import products from "../stores/products-store";
   import Product from "../Products/Product.svelte";
 
-  let products;
-
-  productsStore.subscribe((i) => {
-    products = i;
-  });
+  // let products;
+  //
+  // products.subscribe((i) => {
+  //   products = i;
+  // });
 </script>
 
 <section>
   <h1>Products</h1>
-  {#each products as product (product.id)}
+  {#each $products as product (product.id)}
     <Product
       id={product.id}
       title={product.title}
