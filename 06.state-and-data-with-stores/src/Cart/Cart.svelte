@@ -3,6 +3,7 @@
   import cart from "../stores/cart-store";
   import { onDestroy } from "svelte";
   import { timer } from "../stores/timer-store";
+  import { time, elapsed } from "../stores/time-store";
 
   const unsubscribe = timer.subscribe((count) => {
     console.log(`Cart : ${count}`);
@@ -16,6 +17,8 @@
 <section>
   <h1>Cart</h1>
   <h2>Count : {$timer}</h2>
+  <h2>Date : {$time}</h2>
+  <h2>Elapsed Date : {$elapsed}</h2>
   <ul>
     {#each $cart as item (item.id)}
       <CartItem id={item.id} title={item.title} price={item.price} />
